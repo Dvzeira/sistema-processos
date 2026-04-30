@@ -43,10 +43,10 @@ Projeto fullstack para cadastro e gerenciamento de processos judiciais, desenvol
 
 ## 🚀 Como rodar o projeto
 
-1. Subir os containers
+1. Subir os containers:
 docker compose up -d --build
 
-2. Rodar migrations do backend
+2. Rodar migrations do backend:
 docker exec -it laravel_app php artisan migrate
 
 
