@@ -1,7 +1,6 @@
 services:
   db:
     image: mysql:8
-    container_name: mysql_db
     restart: always
     environment:
       MYSQL_DATABASE: processos_db
@@ -14,7 +13,6 @@ services:
   backend:
     build:
       context: ./backend
-    container_name: laravel_app
     working_dir: /var/www
     volumes:
       - ./backend:/var/www
@@ -27,7 +25,6 @@ services:
   frontend:
     build:
       context: ./frontend
-    container_name: react_app
     working_dir: /app
     volumes:
       - ./frontend:/app
