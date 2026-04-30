@@ -1,30 +1,10 @@
-# 🏛️ Sistema de Processos Judiciais
+# Sistema de Processos Judiciais
 
-Sistema fullstack para cadastro e gerenciamento de processos judiciais, desenvolvido como teste técnico utilizando **React, Laravel e Docker**.
-
----
-
-## 🚀 Visão Geral
-
-O sistema permite o cadastro e gerenciamento de processos judiciais com regras de negócio específicas e controle de andamentos vinculados a cada processo.
+Projeto fullstack para cadastro e gerenciamento de processos judiciais, desenvolvido como teste técnico utilizando React, Laravel e Docker.
 
 ---
 
-## 🧠 Regras de Negócio
-
-- Ao cadastrar um processo:
-  - Se a UF for **MG** → mensagem:  
-    "Processo de MG criado com sucesso"
-  - Caso contrário →  
-    "Processo fora de MG criado com sucesso"
-
-- Cada processo pode possuir múltiplos andamentos
-- Andamentos pertencem a um processo (relação 1:N)
-- Ao excluir um processo, seus andamentos são removidos automaticamente (cascade)
-
----
-
-## 🛠️ Tecnologias
+## 🛠️ Tecnologias Utilizadas
 
 ### Frontend
 - React (Vite)
@@ -45,53 +25,37 @@ O sistema permite o cadastro e gerenciamento de processos judiciais com regras d
 
 ---
 
-## 🐳 Como executar o projeto
+## 🧠 Regras de Negócio
 
-### 1. Clonar o repositório
+1) Ao cadastrar um processo:
+  - Se a UF for **MG**, exibir:  
+    "Processo de MG criado com sucesso"
+  - Caso contrário:  
+    "Processo fora de MG criado com sucesso"
 
-```bash id="clone1"
-git clone https://github.com/Dvzeira/sistema-processos.git
-cd sistema-processos
-2. Subir os containers
+2) Cada processo pode possuir múltiplos andamentos
+3) Andamentos são vinculados ao processo (relação 1:N)
+4) Ao excluir um processo, seus andamentos são removidos automaticamente (cascade delete)
+
+---
+
+
+
+## 🚀 Como rodar o projeto
+
+1. Subir os containers
 docker compose up -d --build
-3. Rodar migrations
+
+2. Rodar migrations do backend
 docker exec -it laravel_app php artisan migrate
+
+
+
 🌐 Acessos
 Frontend: http://localhost:5173
 Backend API: http://localhost:8000/api/processos
-Banco de dados: MySQL (Docker container)
-📂 Estrutura do Projeto
-sistema-processos/
-│
-├── backend/        # Laravel API
-├── frontend/       # React App
-├── docker-compose.yml
-├── README.md
-⚙️ Funcionalidades
-Processos
-Criar processo
-Listar processos
-Editar processo
-Excluir processo
-Andamentos
-Adicionar andamento
-Listar andamentos
-Remover automaticamente ao excluir processo
-🧪 Status do Projeto
+Banco de dados: MySQL (Docker)
 
-✔ Backend funcional
-✔ Frontend funcional
-✔ Banco de dados integrado
-✔ Docker configurado
-✔ API REST funcionando
-✔ Regras de negócio implementadas
+O projeto foi desenvolvido com foco em integração entre frontend, backend e infraestrutura containerizada utilizando Docker.
 
-👨‍💻 Autor
-
-Desenvolvido por Davi Andrade
-
-Projeto desenvolvido para avaliação técnica fullstack (React + Laravel + Docker).
-
-📌 Observação
-
-Projeto construído com foco em boas práticas de integração entre frontend, backend e containerização.
+Autor: Davi Andrade da Silva
