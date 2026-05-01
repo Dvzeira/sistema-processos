@@ -1,10 +1,11 @@
 services:
   db:
     image: mysql:8
+    container_name: mysql_db
     restart: always
     environment:
       MYSQL_DATABASE: processos_db
-      MYSQL_ROOT_PASSWORD: Davi_andrade2006
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3307:3306"
     volumes:
@@ -13,6 +14,7 @@ services:
   backend:
     build:
       context: ./backend
+    container_name: laravel_app
     working_dir: /var/www
     volumes:
       - ./backend:/var/www
@@ -20,17 +22,18 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    command: php artisan serve --host=0.0.0.0 --port=8000
 
   frontend:
     build:
       context: ./frontend
+    container_name: react_app
     working_dir: /app
     volumes:
       - ./frontend:/app
       - /app/node_modules
     ports:
       - "5173:5173"
-    stdin_open: true
     command: npm run dev -- --host
 
 volumes:
