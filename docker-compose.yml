@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: mysql:8
@@ -15,25 +17,39 @@ services:
     build:
       context: ./backend
     container_name: laravel_app
-    working_dir: /var/www
-    volumes:
-      - ./backend:/var/www
     ports:
       - "8000:8000"
     depends_on:
       - db
-    command: php artisan serve --host=0.0.0.0 --port=8000
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: processos_db
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    command: >
+      sh -c "
+      echo '⏳ esperando MySQL...' &&
+      until php -r \"try { new PDO('mysql:host=db;port=3306;dbname=processos_db', 'root', 'root'); echo 'ok'; } catch(Exception \$e) { exit(1); }\"; do
+        sleep 2;
+      done &&
+      echo '✅ MySQL pronto!' &&
+      php artisan config:clear &&
+      php artisan cache:clear &&
+      php artisan key:generate &&
+      php artisan migrate --force &&
+      php artisan serve --host=0.0.0.0 --port=8000
+      "
 
   frontend:
     build:
       context: ./frontend
     container_name: react_app
-    working_dir: /app
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
     ports:
       - "5173:5173"
+    depends_on:
+      - backend
     command: npm run dev -- --host
 
 volumes:

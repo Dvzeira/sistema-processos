@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Processos from "./pages/Processos";
 import Andamentos from "./pages/Andamentos";
-import Navbar from "./componentes/NavBar";
 import EditarProcesso from "./pages/EditarProcesso";
 import EditarAndamento from "./pages/EditarAndamento";
 import './index.css';
+import Navbar from "./componentes/Navbar";
 
 function App() {
   return (
