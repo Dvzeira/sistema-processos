@@ -46,8 +46,11 @@ Projeto fullstack para cadastro e gerenciamento de processos judiciais, desenvol
 1. Subir os containers:
 docker compose up -d --build
 
-2. Rodar migrations do backend:
-docker exec -it laravel_app php artisan migrate
+2. instalar dependências do Laravel 
+docker compose run --rm backend composer install
+
+3. rodar migrations
+docker compose exec backend php artisan migrate
 
 
 
